@@ -1,5 +1,7 @@
 const db = require("../models");
-const User = db.users;
+const User = db.user;
+
+var bcrypt = require("bcryptjs");
 
 exports.create = (req, res) => {
   if (!req.body.name) {
@@ -12,7 +14,7 @@ exports.create = (req, res) => {
   const user = {
     name: req.body.name,
     username: req.body.username,
-    password: req.body.password,
+    password: bcrypt.hashSync(req.body.password, 8),
     status: req.body.status ? req.body.status : 0
   };
 
