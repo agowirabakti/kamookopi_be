@@ -6,10 +6,10 @@ module.exports = (sequelize, Sequelize) => {
     nama_barang: {
       type: Sequelize.STRING
     },
-    id_user: {
-      type: Sequelize.STRING
+    userId: {
+      type: Sequelize.INTEGER
     }
   });
-  
+
   return Barang;
 };

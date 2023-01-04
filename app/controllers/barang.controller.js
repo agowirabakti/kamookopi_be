@@ -12,7 +12,7 @@ exports.create = (req, res) => {
   const barang = {
     kode_barang: req.body.kode_barang,
     nama_barang: req.body.nama_barang,
-    id_user: req.body.id_user,
+    userId: req.body.userId,
   };
   
   Barang.create(barang)

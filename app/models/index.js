@@ -26,7 +26,7 @@ db.barang = require("./barang.model")(sequelize, Sequelize);
 db.kelola = require("./kelola.model")(sequelize, Sequelize);
 db.masuk = require("./masuk.model")(sequelize, Sequelize);
 db.keluar = require("./keluar.model")(sequelize, Sequelize);
-db.history = require("./history.model")(sequelize, Sequelize);
+// db.history = require("./history.model")(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
@@ -38,6 +38,12 @@ db.user.belongsToMany(db.role, {
   foreignKey: "userId",
   otherKey: "roleId"
 });
+
+db.kelola.belongsTo(db.barang, {foreignKey: "barangId"})
+
+db.masuk.belongsTo(db.kelola, {foreignKey: "kelolaId"})
+
+db.keluar.belongsTo(db.kelola, {foreignKey: "kelolaId"})
 
 db.ROLES = ["user", "admin"];
 

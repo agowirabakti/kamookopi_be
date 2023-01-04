@@ -1,18 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
-  const Keluar = sequelize.define("barang_keluar", {
+  const Keluar = sequelize.define("keluar", {
     stok: {
       type: Sequelize.INTEGER
     },
-    id_kelola: {
+    kelolaId: {
       type: Sequelize.INTEGER
     },
-    id_barang: {
-      type: Sequelize.INTEGER
-    },
-    id_user: {
+    userId: {
       type: Sequelize.INTEGER
     }
   });
-  
+
   return Keluar;
 };
