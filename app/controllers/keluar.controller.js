@@ -28,7 +28,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Masuk.findAll({include: [{model: Kelola}]})
+  Keluar.findAll({include: [{model: Kelola}]})
   .then(data => {
     res.send(data);
   })
@@ -38,4 +38,35 @@ exports.findAll = (req, res) => {
         err.message || "Some error occurred while retrieving keluars."
     });
   });
-}
+};
+
+exports.findAllOne = (req, res) => {
+  const id = req.params.id;
+  
+  Keluar.findAll({where: { kelolaId: id }})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving keluars."
+    });
+  });
+};
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Keluar.destroy({where: { kelolaId: id }})
+  .then(num => {
+    if (num == 1) {
+      res.send({message: "Keluar was deleted successfully!"});
+    } else {
+      res.send({message: `Cannot delete Keluar with id=${id}. Maybe Keluar was not found!`});
+    }
+  })
+  .catch(err => {
+    res.status(500).send({message: "Could not delete Keluar with id=" + id});
+  });
+};

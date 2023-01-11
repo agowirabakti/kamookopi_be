@@ -11,13 +11,13 @@ module.exports = app => {
   router.get("/", keluar.findAll);
   
   // Retrieve a single Tutorial with id
-  // router.get("/:id", users.findOne);
+  router.get("/:id", keluar.findAllOne);
     
   // Update a Tutorial with id
   // router.put("/:id", masuk.update);
     
   // Delete a Tutorial with id
-  // router.delete("/:id", masuk.delete);
+  router.delete("/:id", keluar.delete);
     
   app.use('/api/keluars', [authJwt.verifyToken, authJwt.isAdmin], router);
 };

@@ -38,4 +38,34 @@ exports.findAll = (req, res) => {
         err.message || "Some error occurred while retrieving kelolas."
     });
   });
-}
+};
+
+exports.findAllOne = (req, res) => {
+  const id = req.params.id;
+  Masuk.findAll({where: { kelolaId: id }})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving kelolas."
+    });
+  });
+};
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Masuk.destroy({where: { kelolaId: id }})
+  .then(num => {
+    if (num == 1) {
+      res.send({message: "Masuk was deleted successfully!"});
+    } else {
+      res.send({message: `Cannot delete Masuk with id=${id}. Maybe Masuk was not found!`});
+    }
+  })
+  .catch(err => {
+    res.status(500).send({message: "Could not delete Masuk with id=" + id});
+  });
+};
